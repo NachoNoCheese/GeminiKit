@@ -360,6 +360,10 @@ let indexHTML = """
                         <span>📖</span>
                         View Documentation
                     </a>
+                    <a href="https://github.com/guitaripod/GeminiKit" class="button button-primary">
+                        <span>📦</span>
+                        GitHub
+                    </a>
                     <a href="#" class="button button-secondary">
                         <span style="display: flex; align-items: center; gap: 8px;">
                             <span>🎓</span>
