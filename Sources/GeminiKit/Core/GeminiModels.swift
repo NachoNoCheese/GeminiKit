@@ -11,6 +11,7 @@ import Foundation
 /// ### Text Generation Models
 /// - ``gemini25Flash``
 /// - ``gemini25Pro``
+/// - ``gemini3Pro``
 /// - ``gemini25FlashLite``
 /// - ``gemini20Flash``
 /// - ``gemini15Flash``
@@ -45,7 +46,8 @@ import Foundation
 ///
 /// ### For General Use
 /// - **Gemini 2.5 Flash**: Best balance of speed and capability
-/// - **Gemini 2.5 Pro**: Highest quality for complex reasoning
+/// - **Gemini 2.5 Pro**: Second greatest quality for complex reasoning
+/// - **Gemini 3 Pro**: Latest model with maximum reasoning
 /// - **Gemini 2.5 Flash Lite**: Fastest response times for simple tasks
 ///
 /// ### For Specialized Tasks
@@ -80,9 +82,13 @@ public enum GeminiModel: String, CaseIterable, Sendable {
     /// Best for general-purpose tasks requiring speed and efficiency.
     case gemini25Flash = "gemini-2.5-flash"
     
-    /// Gemini 2.5 Pro: Most capable model with 2M token context window.
+    /// Gemini 2.5 Pro: Second most capable model with 2M token context window.
     /// Ideal for complex reasoning, analysis, and creative tasks.
     case gemini25Pro = "gemini-2.5-pro"
+
+    /// Gemini 3.0 Pro: Most capable model with 1M token context window.
+    /// Ideal for complex reasoning, analysis, and creative tasks.
+    case gemini3Pro = "gemini-3.0-pro-preview"
     
     /// Gemini 2.5 Flash Lite: Lightweight variant optimized for minimal latency.
     /// Perfect for real-time applications and simple tasks.
@@ -146,7 +152,7 @@ public enum GeminiModel: String, CaseIterable, Sendable {
     /// providing a final answer, useful for complex problem-solving.
     public var supportsThinking: Bool {
         switch self {
-        case .gemini25Flash, .gemini25Pro, .gemini25FlashLite:
+        case .gemini25Flash, .gemini25Pro, .gemini3Pro, .gemini25FlashLite:
             return true
         default:
             return false
@@ -202,7 +208,7 @@ public enum GeminiModel: String, CaseIterable, Sendable {
     /// - Returns: Token limit or nil for specialized models without text generation
     public var contextWindow: Int? {
         switch self {
-        case .gemini25Flash, .gemini25FlashLite, .gemini20Flash, .gemini15Flash:
+        case .gemini3Pro, .gemini25Flash, .gemini25FlashLite, .gemini20Flash, .gemini15Flash:
             return 1_000_000
         case .gemini25Pro, .gemini15Pro:
             return 2_000_000
@@ -220,7 +226,7 @@ public enum GeminiModel: String, CaseIterable, Sendable {
     /// - Returns: Token budget or nil for models without thinking support
     public var defaultThinkingBudget: Int? {
         switch self {
-        case .gemini25Flash, .gemini25Pro:
+        case .gemini25Flash, .gemini25Pro, .gemini3Pro:
             return -1 // Dynamic allocation
         case .gemini25FlashLite:
             return 0 // Off by default
@@ -234,7 +240,7 @@ public enum GeminiModel: String, CaseIterable, Sendable {
         switch self {
         case .gemini25Flash:
             return 0...24576
-        case .gemini25Pro:
+        case .gemini25Pro, .gemini3Pro:
             return 128...32768
         case .gemini25FlashLite:
             return 512...24576
