@@ -86,9 +86,9 @@ public enum GeminiModel: String, CaseIterable, Sendable {
     /// Ideal for complex reasoning, analysis, and creative tasks.
     case gemini25Pro = "gemini-2.5-pro"
 
-    /// Gemini 3.0 Pro: Most capable model with 1M token context window.
+    /// Gemini 3 Pro: Most capable model with 1M token context window.
     /// Ideal for complex reasoning, analysis, and creative tasks.
-    case gemini3Pro = "gemini-3.0-pro-preview"
+    case gemini3Pro = "gemini-3-pro-preview"
     
     /// Gemini 2.5 Flash Lite: Lightweight variant optimized for minimal latency.
     /// Perfect for real-time applications and simple tasks.
