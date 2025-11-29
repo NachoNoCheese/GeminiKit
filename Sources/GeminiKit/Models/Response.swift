@@ -10,9 +10,6 @@ public struct GenerateContentResponse: Codable, Equatable, Sendable {
     
     /// Model version used
     public let modelVersion: String?
-    
-    /// Prompt feedback
-    public let promptFeedback: PromptFeedback?
 }
 
 /// A generated candidate response
